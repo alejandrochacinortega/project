@@ -1,7 +1,7 @@
 ### READ ME ##
 
 99% of our work will be done in the www folder.
-There we 5 folders together with the index.html file. The app is where we will be working most of our time.
+There we have 5 folders together with the index.html file. The app is where we will be working most of our time.
 Inside the app folder, you can fin the different folders for our application (i.e. home, receipts), a service folder where we have our service script and finally the app.js file.
 
 
