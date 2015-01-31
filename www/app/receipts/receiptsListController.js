@@ -21,6 +21,17 @@ function ReceiptsListController(MockDataService, $state) {
     function activate() {
     }
 
+    vm.receiptDetail = receiptDetail;
+
+    function receiptDetail(receipt) {
+        $state.go('app.receiptSingle');
+        vm.receipt = receipt;
+        console.log(vm.receipt);
+        return vm.receipt;
+    }
+
+    /*console.log('outside: ', vm.receipt)*/
+
 
 
 }

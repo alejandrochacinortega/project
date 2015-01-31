@@ -46,17 +46,9 @@ angular.module('App', ['ionic', 'common.services'])
           'menuContent': {
             templateUrl: "app/receipts/receiptSingle.html",
             controller: 'ReceiptSingleController as vm'
-/*
-            resolve: {
-              receiptResource: "receiptResource",
-
-              receipt: function (receiptResource, $stateParams) {
-                var receiptId = $stateParams.receiptId;
-                return receiptResource.get({ receiptId: receiptId }).$promise;
-              }
-            }*/
           }
         }
+
       });
 
   $urlRouterProvider.otherwise('/app/home');
