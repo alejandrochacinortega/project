@@ -30,7 +30,8 @@ function HomeController($scope, MockDataService, $state, $timeout) {
         $state.go('app.receiptsList');
     }
 
-    console.log(vm.getSingleData)
+    console.log('single: ', vm.single);
+    console.log('single: ', vm.data);
 
 
 

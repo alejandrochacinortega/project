@@ -1,4 +1,4 @@
-angular.module('App', ['ionic'])
+angular.module('App', ['ionic', 'common.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -34,8 +34,27 @@ angular.module('App', ['ionic'])
         url: "/receiptsList",
         views: {
           'menuContent': {
-            templateUrl: "app//receipts/receiptsList.html",
+            templateUrl: "app/receipts/receiptsList.html",
             controller: 'ReceiptsListController as vm'
+          }
+        }
+      })
+
+      .state('app.receiptSingle', {
+        url: "/receiptsList/:receiptId",
+        views: {
+          'menuContent': {
+            templateUrl: "app/receipts/receiptSingle.html",
+            controller: 'ReceiptSingleController as vm'
+/*
+            resolve: {
+              receiptResource: "receiptResource",
+
+              receipt: function (receiptResource, $stateParams) {
+                var receiptId = $stateParams.receiptId;
+                return receiptResource.get({ receiptId: receiptId }).$promise;
+              }
+            }*/
           }
         }
       });

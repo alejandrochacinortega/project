@@ -10,12 +10,9 @@ function ReceiptsListController(MockDataService, $state) {
     vm.activate = activate;
     vm.title = 'ReceiptsListController';
 
-    vm.singleReceipt = singleReceipt;
+    vm.singleReceipt = MockDataService.getSingleData();
 
-    /*vm.getData = MockDataService.getData();
-    console.log(vm.getData);*/
-
-    vm.data = MockDataService.getData();
+    vm.receipts = MockDataService.getData();
 
     activate();
 
@@ -24,11 +21,6 @@ function ReceiptsListController(MockDataService, $state) {
     function activate() {
     }
 
-    function singleReceipt(data) {
-        console.log(data);
-        console.log('It works!');
-        $state.go('app.home', data);
-    }
 
 
 }
