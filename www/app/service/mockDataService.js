@@ -1,10 +1,10 @@
 angular
     .module('common.services')
-    .factory('MockDataService', [MockDataService]);
+    .factory('MockDataService', ['$rootScope', '$ionicPlatform', MockDataService]);
 
 
 /* @ngInject */
-function MockDataService() {
+function MockDataService($rootScope, $ionicPlatform) {
 
     var receipts = [
         {
@@ -69,12 +69,67 @@ function MockDataService() {
         return d;
     }
 
+
+
+    function getTag() {
+        var tag = {};
+
+        $ionicPlatform.ready(function() {
+            nfc.addMimeTypeListener("text/json", onNfc, success, failure);
+            /*nfc.addNdefListener(onNfc, success, failure);*/
+
+
+         function onNfc(nfcEvent) {
+             console.log('it is working!: ', nfcEvent);
+             var tag = nfcEvent.tag,
+                 text = "",
+                 payload;
+
+             console.log(tag);
+
+             r = ndef.record()
+
+             payload = tag.ndefMessage[0].payload;
+
+             if (payload[0] < 5) {
+                 // payload begins with a small integer, it's encoded text
+                 var languageCodeLength = payload[0];
+                 // chop off the language code and convert to string
+                 text = nfc.bytesToString(payload.slice(languageCodeLength + 1));
+             } else {
+                 // assume it's text without language info
+                 text = nfc.bytesToString(payload);
+
+             }
+
+             console.log('TEXT: ', text);
+
+
+
+              angular.copy(nfcEvent.tag, tag);
+            /* $rootScope.$apply(function(){
+                 angular.copy(nfcEvent.tag, tag);
+                 // if necessary $state.go('some-route')
+             });*/
+         }
+
+        function success() {
+                console.log("Listening for NDEF Tags.");
+            }
+
+        function failure (reason) {
+                alert("Error adding NFC Listener " + reason);
+            };
+        });
+    }
+
     ////////////////
 
     var service = {
         getData : getData,
         getSingleData: getSingleData,
-        getReceipt: getReceipt
+        getReceipt: getReceipt,
+        getTag: getTag
     };
 
     return service;
